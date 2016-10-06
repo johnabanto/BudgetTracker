@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Budget Tracker</title>
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="/app/styles/styles.css">
+<!-- endinject -->
+</head>
+
+<body ng-controller="mainCtrl">
+	<!-- Heading title -->
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">
+				<h1>Budget Tracker</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container-fluid">
+			<!-- Income entries box -->
+			<div class="col-xs-6">
+				<div class="panel panel-success" id="box">
+					<div class="panel-heading"">Income Entries</div>
+						<div class="panel-body">
+							<label>Description</label>
+							<input ng-model="incomeDes" type="text" class="form-control" id="inputIncome" placeholder="Enter source">
+								<br>
+							<label>Amount</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<input ng-model="incomeDollars" type="number" class="form-control" id="inputDollars1" placeholder="Enter dollars">
+							</div><br>
+							<button ng-click="addIncome()" class="btn btn-success form-control">
+							<span class="glyphicon glyphicon-plus"></span>
+							Add income</button>
+						</div>
+						<table class="table table-bordered">
+							<th>Description</th>
+							<th>Amount</th>
+								<tbody>
+									<tr ng-repeat="income in income">
+										<td>{{income.incomeDes}}</td>
+										<td>{{income.incomeDollars | currency}}</td>
+								</tbody>
+						</table>
+				</div>	
+			</div>
+			<!-- Expense entires box -->
+			<div class=" col-xs-6">
+				<div class="panel panel-danger" id="box">
+					<div class="panel-heading">Expense Entries</div>
+						<div class="panel-body">
+							<label>Description</label>
+							<input ng-model="expenseDes" type="text" class="form-control" id="inputIncome" placeholder="Enter source">
+								<br>
+							<label>Amount</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<input ng-model="expenseDollars" type="number" class="form-control" id="inputDollars2" placeholder="Enter dollars">
+							</div><br>
+							<button ng-click="addExpense()" class="btn btn-danger form-control">
+							<span class="glyphicon glyphicon-plus"></span>
+							Add expense</button>
+						</div>
+						<table class="table table-bordered">
+							<th>Description</th>
+							<th>Amount</th>
+								<tbody>
+									<tr ng-repeat="expense in expense">
+										<td>{{expense.expenseDes}}</td>
+										<td>{{expense.expenseDollars | currency}}</td>
+								</tbody>
+						</table>
+					</div>
+			</div>
+	</div>
+
+	<!-- Summary box -->
+	<div class="container">
+		<div class="col-xs-8 col-xs-offset-2">
+			<div class="panel panel-info" id="box">
+				<div class="panel-heading">Summary</div>
+					<div class="panel-body">
+						<label>Total Income</label>
+							{{ aIncome() | currency}} 
+							<br>
+						<label>Total Expense</label>
+							{{ aExpense() | currency}}
+							<br>
+						<label>Left after spending</label>
+							{{ aIncome()-aExpense() | currency }}
+					</div>
+			</div>
+		</div>
+	</div>
+	
+
+ </script>
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- endbower -->
+
+<!-- inject:js -->
+<script src="/app/index.js"></script>
+<!-- endinject -->
+</body>
+</html>
